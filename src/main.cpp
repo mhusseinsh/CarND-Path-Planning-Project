@@ -57,23 +57,9 @@ int main() {
   // Reference velocity
   double ref_vel = 0.0; // mph
 
-  // Define const values for lane information
-  const int LEFT_LANE = 0;
-  const int MIDDLE_LANE = 1;
-  const int RIGHT_LANE = 2;
-
-  const int ORIGIN_LANE_BOUNDARY = 0;
-  const int LEFT_LANE_BOUNDARY = 4;
-  const int MIDDLE_LANE_BOUNDARY = 8;
-  const int RIGHT_LANE_BOUNDARY = 12;
-
-  // Maximum velocity and acceleration
-  const double MAX_VELOCITY = 49.5;
-  const double MAX_ACC = .224;
-
   h.onMessage([&map_waypoints_x, &map_waypoints_y, &map_waypoints_s,
                &map_waypoints_dx, &map_waypoints_dy, &ego_car_lane,
-               &ref_vel, &MAX_VELOCITY, &MAX_ACC](uWS::WebSocket<uWS::SERVER> ws, char *data,
+               &ref_vel](uWS::WebSocket<uWS::SERVER> ws, char *data,
                          size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -115,6 +101,15 @@ int main() {
            * TODO: define a path made up of (x,y) points that the car will visit
            *   sequentially every .02 seconds
            */
+          // Define const values for lane information
+          const int LEFT_LANE = 0;
+          const int MIDDLE_LANE = 1;
+          const int RIGHT_LANE = 2;
+
+          const int ORIGIN_LANE_BOUNDARY = 0;
+          const int LEFT_LANE_BOUNDARY = 4;
+          const int MIDDLE_LANE_BOUNDARY = 8;
+          const int RIGHT_LANE_BOUNDARY = 12;
 
           // Size of previous path points
           int prev_size = previous_path_x.size();
@@ -154,22 +149,24 @@ int main() {
             // If the other car is on the same lane
             if (other_car_lane == ego_car_lane) {
               // If the car is close to my car
-              car_front |= check_car_s > car_s && (check_car_s - car_s) < 30;
+              car_front |= check_car_s > car_s && check_car_s - car_s < 30;
             }
             // If the other car is on the left of my car
             else if (other_car_lane - ego_car_lane == -1) {
               // If the car is close to my car
               car_left |=
-                  car_s - 30 < (check_car_s && car_s) + 30 > check_car_s;
+                  car_s - 30 < check_car_s && car_s + 30 > check_car_s;
             }
             // If the other car is on the right of my car
             else if (other_car_lane - ego_car_lane == 1) {
               // If the car is close to my car
               car_right |=
-                  car_s - 30 < (check_car_s && car_s) + 30 > check_car_s;
+                  car_s - 30 < check_car_s && car_s + 30 > check_car_s;
             }
           }
 
+          const double MAX_VELOCITY = 49.5;
+          const double MAX_ACC = .224;
           // Take Action
           // If vehicle is on the same lane and close to my car
           if (car_front) {
