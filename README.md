@@ -171,10 +171,9 @@ A really helpful resource for doing this project and creating smooth trajectorie
 
 The path planning consists of three major components which are prediction, behavioral planning, and trajectory planning.
 
-The path planning is initialized in the [`main.cpp`](https://github.com/mhusseinsh/CarND-Path-Planning-Project/blob/master/src/main.cpp) by passing the map waypoints of the highway to the constructor.
-
 ![alttext][flowchart]
 
+The path planning is initialized in the [`main.cpp`](https://github.com/mhusseinsh/CarND-Path-Planning-Project/blob/master/src/main.cpp) by passing the map waypoints of the highway to the constructor.
 
 ### Prediction
 In the prediction part, the code works with telemetry and sensor fusion data. The goal of the prediction section is to study the surrounding environment and check the status of all the other vehicles which are driving around the ego-vehicle. What the prediction is trying to output is one or more of the following situations:
