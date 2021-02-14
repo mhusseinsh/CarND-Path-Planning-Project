@@ -230,7 +230,7 @@ Based on the defined [Rubric Points](https://review.udacity.com/#!/rubrics/1971/
 
 2. **The car drives according to the speed limit.**: The car did not exceed the maximum allowed speed limit of 50 MPH (No red warnings appeared for exceeding the speed limit), also it did not drive slow and obstructed the traffic flow at all (except when it is slowing down because it was obstructed by traffic).
 
-3. **Max Acceleration and Jerk are not Exceeded.**: The maximum acceleration and jerk were not exceeded (No red warning messages appeared as well).
+3. **Max Acceleration and Jerk are not Exceeded.**: The maximum acceleration of 10 m/s^2 and jerk of 10 m/s^3 were not exceeded (No red warning messages appeared as well).
    
 4. **Car does not have collisions.**: Within all the driving tests, the car did not have any collisions.
    
